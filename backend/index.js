@@ -52,4 +52,16 @@ router.route('/pandaTable/:Order_id')
         res.json({ message: 'Order deleted: ' + req.params.Order_id });
     })
 
+    
+    router.route('/pandaTable/update/:Order_id')
+    .put((req, res) => {                               // Update a Order
+        // var id = req.params.Order_id
+        let id = pandaTable.findIndex((Order) => Order.id === +req.params.Order_id)
+        pandaTable[id].name = req.body.name;
+        pandaTable[id].Address = req.body.Address
+        pandaTable[id].order = req.body.order
+        pandaTable[id].Time = req.body.Time
+        res.json({ message: 'Order updated!' + req.params.Order_id });
+    })
+
 app.listen(3001, () => console.log('server ready'))
